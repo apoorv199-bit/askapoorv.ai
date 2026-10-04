@@ -3,12 +3,9 @@
 // Real-time Token Streaming & Dynamic Candidate Dossier Binding
 // ==========================================================================
 
-const API_BASE = window.location.origin.includes(":8000")
-  ? "" 
-  : "http://localhost:8000";
-
-const PROFILE_ENDPOINT = `${API_BASE}/api/v1/chat/profile`;
-const STREAM_ENDPOINT = `${API_BASE}/api/v1/chat/stream`;
+// API Endpoints (Using relative paths so it works seamlessly on localhost and production)
+const PROFILE_ENDPOINT = "/api/v1/chat/profile";
+const STREAM_ENDPOINT = "/api/v1/chat/stream";
 
 // DOM Elements
 const dossierNameEl = document.getElementById("dossierName");

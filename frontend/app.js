@@ -42,6 +42,26 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
   });
 });
 
+// ================= Mobile View Navigation (Dossier vs Copilot) =================
+const mobileNavBtns = document.querySelectorAll(".mobile-nav-btn");
+const dossierPanelEl = document.querySelector(".dossier-panel");
+const chatPanelEl = document.querySelector(".chat-panel");
+
+mobileNavBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    mobileNavBtns.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const view = btn.dataset.view;
+    if (view === "dossier") {
+      dossierPanelEl.classList.add("mobile-active");
+      chatPanelEl.classList.remove("mobile-active");
+    } else {
+      chatPanelEl.classList.add("mobile-active");
+      dossierPanelEl.classList.remove("mobile-active");
+    }
+  });
+});
+
 // ================= Load Candidate Dossier =================
 async function loadCandidateDossier() {
   try {

@@ -55,7 +55,7 @@ def get_or_parse_resume(
             return Resume.model_validate_json(cache_path.read_text())
 
     # Otherwise, extract from PDF and parse with LLM
-    print("⏳ Parsing resume with Groq LLM (this may take a few seconds)...")
+    print("Parsing resume with Groq LLM (this may take a few seconds)...")
     resume_text = read_pdf(resume_path)
     resume = parse_resume_text(resume_text, client=client)
 

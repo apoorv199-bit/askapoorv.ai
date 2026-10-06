@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AskApoorv.ai | Candidate Portfolio & AI Recruiter Copilot</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <link rel="stylesheet" href="style.css" />
@@ -24,24 +24,34 @@
     </div>
     
     <div class="nav-actions">
-      <a href="/api/v1/chat/resume-download" download class="btn btn-primary" id="downloadResumeTop">
+      <a href="/api/v1/chat/resume-download" download class="btn btn-primary" id="downloadResumeTop" title="Download Official Resume (PDF)">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        <span>Download Official Resume (PDF)</span>
+        <span class="btn-text">Resume (PDF)</span>
       </a>
-      <a href="mailto:apoorvsahu199@gmail.com" class="btn btn-secondary">
+      <a href="mailto:apoorvsahu199@gmail.com" class="btn btn-secondary" title="Email Candidate">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
           <polyline points="22,6 12,13 2,6"></polyline>
         </svg>
-        <span>Contact Candidate</span>
+        <span class="btn-text">Contact</span>
       </a>
-      <a href="/docs" target="_blank" class="btn btn-ghost" title="View Swagger OpenAPI Spec">API Docs ↗</a>
+      <a href="/docs" target="_blank" class="btn btn-ghost nav-docs-link" title="View Swagger OpenAPI Spec">API Docs ↗</a>
     </div>
   </header>
+
+  <!-- Mobile Segmented View Switcher (Only visible on screens < 850px) -->
+  <div class="mobile-view-nav">
+    <button class="mobile-nav-btn active" data-view="chat">
+      <span class="nav-icon">💬</span> AI Copilot
+    </button>
+    <button class="mobile-nav-btn" data-view="dossier">
+      <span class="nav-icon">👤</span> Candidate Dossier
+    </button>
+  </div>
 
   <!-- Main Container -->
   <div class="app-layout">
@@ -201,7 +211,7 @@
     </aside>
 
     <!-- RIGHT COLUMN: AI Recruiter Copilot & Live Chat -->
-    <main class="chat-panel">
+    <main class="chat-panel mobile-active">
       <!-- Chat Header -->
       <div class="chat-header">
         <div class="copilot-info">

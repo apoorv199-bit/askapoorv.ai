@@ -492,8 +492,9 @@ promptsContainerEl.addEventListener("click", (e) => {
 });
 
 // Clear Chat
-clearChatBtn.addEventListener("click", () => {
-  chatContainerEl.innerHTML = `
+document.querySelectorAll(".clear-chat-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    chatContainerEl.innerHTML = `
     <div class="message assistant">
       <div class="msg-avatar-col">
         <div class="msg-avatar-icon">🤖</div>
@@ -509,6 +510,7 @@ clearChatBtn.addEventListener("click", () => {
       </div>
     </div>
   `;
+  });
 });
 
 // ================= Formatting Helpers =================

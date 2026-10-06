@@ -25,4 +25,5 @@ dist/
 # OS / Editor files
 .DS_Store
 .vscode/
-.idea/
+# Local caches
+backend/data/cached_resume.json

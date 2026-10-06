@@ -45,11 +45,19 @@
 
   <!-- Mobile Segmented View Switcher (Only visible on screens < 850px) -->
   <div class="mobile-view-nav">
-    <button class="mobile-nav-btn active" data-view="chat">
-      <span class="nav-icon">💬</span> AI Copilot
-    </button>
-    <button class="mobile-nav-btn" data-view="dossier">
-      <span class="nav-icon">👤</span> Candidate Dossier
+    <div class="mobile-tabs-group">
+      <button class="mobile-nav-btn active" data-view="chat">
+        <span class="nav-icon">💬</span> AI Copilot
+      </button>
+      <button class="mobile-nav-btn" data-view="dossier">
+        <span class="nav-icon">👤</span> Candidate Dossier
+      </button>
+    </div>
+    <button class="icon-btn clear-chat-btn mobile-reset-btn" title="Reset conversation">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="1 4 1 10 7 10"></polyline>
+        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+      </svg>
     </button>
   </div>
 
@@ -233,7 +241,7 @@
           </div>
         </div>
         <div class="chat-controls">
-          <button id="clearChatBtn" class="icon-btn" title="Reset conversation">
+          <button id="clearChatBtn" class="icon-btn clear-chat-btn" title="Reset conversation">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="1 4 1 10 7 10"></polyline>
               <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>

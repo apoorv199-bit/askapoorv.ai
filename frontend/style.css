@@ -36,11 +36,18 @@
   padding: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-app);
   color: var(--text-main);
+  min-height: 100%;
+  height: 100%;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -164,9 +171,9 @@ body {
 /* ================= Main App Layout ================= */
 .app-layout {
   flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: 460px 1fr;
-  height: calc(100vh - 60px);
   overflow: hidden;
 }
 
@@ -945,15 +952,22 @@ body {
 /* Mobile & Small Tablets (< 850px) */
 @media (max-width: 850px) {
   body {
-    height: 100dvh;
+    min-height: 100%;
+    height: 100%;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
   }
 
-  /* Navbar */
+  /* Navbar with safe area support */
   .navbar {
-    height: 52px;
-    padding: 0 0.85rem;
+    height: auto;
+    min-height: calc(48px + env(safe-area-inset-top, 0px));
+    padding-top: max(0.45rem, env(safe-area-inset-top, 0px));
+    padding-left: max(0.85rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.85rem, env(safe-area-inset-right, 0px));
+    padding-bottom: 0.35rem;
+    flex-shrink: 0;
   }
 
   .brand-logo {
@@ -986,11 +1000,11 @@ body {
   /* Mobile Segmented Switcher */
   .mobile-view-nav {
     display: flex;
-    height: 46px;
+    height: 44px;
     background: rgba(13, 20, 36, 0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-subtle);
-    padding: 0.3rem 0.65rem;
+    padding: 0.25rem max(0.65rem, env(safe-area-inset-right, 0px)) 0.25rem max(0.65rem, env(safe-area-inset-left, 0px));
     gap: 0.45rem;
     flex-shrink: 0;
     z-index: 30;
@@ -1024,8 +1038,9 @@ body {
   .app-layout {
     display: flex;
     flex-direction: column;
-    height: calc(100dvh - 98px);
-    height: calc(100vh - 98px);
+    flex: 1;
+    min-height: 0;
+    height: auto;
     overflow: hidden;
   }
 
@@ -1038,20 +1053,20 @@ body {
     overflow: hidden;
   }
 
-  .dossier-panel.mobile-active,
-  .chat-panel.mobile-active {
-    display: flex;
-    flex: 1;
-  }
-
   /* Dossier Panel Mobile Polish */
-  .dossier-panel {
+  .dossier-panel.mobile-active {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
     border-right: none;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .candidate-card {
     padding: 1.15rem 1rem 1rem;
+    flex-shrink: 0;
   }
 
   .candidate-avatar {
@@ -1081,6 +1096,7 @@ body {
     padding: 0 0.85rem;
     overflow-x: auto;
     scrollbar-width: none;
+    flex-shrink: 0;
   }
 
   .dossier-tabs::-webkit-scrollbar {
@@ -1094,26 +1110,31 @@ body {
   }
 
   .tab-content-area {
-    padding: 1rem 1rem 2rem;
+    overflow-y: visible;
+    padding: 1rem 1rem max(1.5rem, env(safe-area-inset-bottom, 0px));
   }
 
   /* Chat Panel Mobile Polish */
-  .chat-header {
-    padding: 0.75rem 1rem;
+  .chat-panel.mobile-active {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
   }
 
-  .copilot-avatar {
-    width: 34px;
-    height: 34px;
-  }
-
-  .copilot-title-row h2 {
-    font-size: 0.95rem;
+  /* Eliminate redundant header on mobile to reclaim ~65px vertical space */
+  .chat-panel .chat-header {
+    display: none;
   }
 
   .messages-container {
-    padding: 1rem 0.85rem;
-    gap: 1.1rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.85rem 0.85rem;
+    gap: 1rem;
   }
 
   .message {
@@ -1134,7 +1155,8 @@ body {
   }
 
   .prompts-ribbon {
-    padding: 0.45rem 0.85rem;
+    flex-shrink: 0;
+    padding: 0.4rem max(0.75rem, env(safe-area-inset-right, 0px)) 0.4rem max(0.75rem, env(safe-area-inset-left, 0px));
   }
 
   .prompts-label {
@@ -1147,7 +1169,11 @@ body {
   }
 
   .input-container {
-    padding: 0.6rem 0.85rem calc(0.6rem + env(safe-area-inset-bottom, 0px)) 0.85rem;
+    flex-shrink: 0;
+    padding-top: 0.5rem;
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+    padding-bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
   }
 
   .chat-form {
@@ -1164,12 +1190,8 @@ body {
     height: 36px;
   }
 
+  /* Hide input hints on touch keyboards to preserve vertical space */
   .input-hint {
-    margin-top: 0.35rem;
-    font-size: 0.68rem;
-  }
-
-  .guardrail-note {
     display: none;
   }
 }
@@ -1177,7 +1199,11 @@ body {
 /* Very Small Mobile (< 400px) */
 @media (max-width: 400px) {
   .navbar {
-    padding: 0 0.5rem;
+    padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
+  }
+  .brand-name {
+    font-size: 0.95rem;
   }
   .candidate-contact-links {
     flex-direction: column;
